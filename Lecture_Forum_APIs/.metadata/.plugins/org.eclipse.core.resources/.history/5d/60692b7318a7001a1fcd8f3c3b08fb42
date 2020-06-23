@@ -1,0 +1,17 @@
+package com.lecture.apis;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+
+import com.example.controller.BusinessController;
+
+@SpringBootApplication
+@ComponentScan(basePackageClasses = BusinessController.class)
+public class LecrureForumApIsApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(LecrureForumApIsApplication.class, args);
+	}
+
+}

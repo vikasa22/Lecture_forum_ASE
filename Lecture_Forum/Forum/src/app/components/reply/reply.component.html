@@ -1,0 +1,27 @@
+<mat-form-field
+  class="example-form-field"
+  appearance="outline"
+  style="margin-top: 5%; width: 80%;"
+>
+  <mat-label>Reply</mat-label>
+  <textarea matInput [(ngModel)]="newThread.replyText"></textarea>
+  <button
+    mat-button
+    *ngIf="newThread.replyText"
+    matSuffix
+    mat-icon-button
+    aria-label="Clear"
+    (click)="newThread.replyText = ''"
+  >
+    <mat-icon matSuffix>close</mat-icon>
+  </button>
+</mat-form-field>
+<br />
+<button
+  mat-raised-button
+  color="primary"
+  [mat-dialog-close]="newThread"
+  cdkFocusInitial
+>
+  Create
+</button>

@@ -1,0 +1,47 @@
+<h1>Create A Thread.</h1>
+<mat-divider></mat-divider>
+<mat-form-field
+  class="example-form-field"
+  appearance="outline"
+  style="margin-top: 5%; width: 80%;"
+>
+  <mat-label>ThreadSummary</mat-label>
+  <input matInput type="text" [(ngModel)]="newThread.threadSummary" />
+  <button
+    mat-button
+    *ngIf="newThread.threadSummary"
+    matSuffix
+    mat-icon-button
+    aria-label="Clear"
+    (click)="newThread.threadSummary = ''"
+  >
+    <mat-icon matSuffix>close</mat-icon>
+  </button>
+</mat-form-field>
+<mat-form-field
+  class="example-form-field"
+  appearance="outline"
+  style="margin-top: 5%; width: 80%;"
+>
+  <mat-label>ThreadDescription</mat-label>
+  <textarea matInput [(ngModel)]="newThread.threadDescription"></textarea>
+  <button
+    mat-button
+    *ngIf="newThread.threadDescription"
+    matSuffix
+    mat-icon-button
+    aria-label="Clear"
+    (click)="newThread.threadDescription = ''"
+  >
+    <mat-icon matSuffix>close</mat-icon>
+  </button>
+</mat-form-field>
+<br />
+<button
+  mat-raised-button
+  color="primary"
+  [mat-dialog-close]="newThread"
+  cdkFocusInitial
+>
+  Create
+</button>

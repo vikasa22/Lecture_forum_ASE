@@ -1,0 +1,5 @@
+package com.lecture.repository;
+
+public class UserRepository {
+
+}
