@@ -1,0 +1,103 @@
+<button
+  mat-fab
+  color="primary"
+  style="right: 20px; top: 0px; left: auto; position: absolute; z-index: 1;"
+  (click)="refresh()"
+>
+  <mat-icon>refresh</mat-icon>
+</button>
+<ng-container *ngIf="threads !== undefined && threads.length > 0">
+  <mat-card
+    class="example-card"
+    [class.mat-elevation-z2]="!isActive"
+    [class.mat-elevation-z8]="isActive"
+    (mouseover)="isActive = true"
+    (mouseout)="isActive = false"
+    style="
+      margin-top: 2.5%;
+      margin-left: 10%;
+      margin-right: 10%;
+      margin-bottom: 5%;
+    "
+    *ngFor="let thread of threads; index as i"
+  >
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ thread.username }}</mat-card-title>
+      <button
+        mat-button
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        style="position: absolute; right: 2%;"
+        (click)="deleteThread(thread.threadID)"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+      <button
+        mat-button
+        matSuffix
+        mat-icon-button
+        aria-label="edit"
+        style="position: absolute; right: 8%;"
+        (click)="editThread(thread)"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <mat-card-subtitle
+        >{{ thread.threadSummary }}
+        <p
+          style="
+            right: 20px;
+            top: 50px;
+            left: auto;
+            position: absolute;
+            z-index: 1;
+          "
+        >
+          {{ thread.dateTime | date: "dd/MM/yyyy HH:mm:ss" }}
+        </p>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h1>{{ thread.threadDescription }}</h1>
+      <mat-accordion
+        *ngIf="thread.reply !== undefined && thread.reply.length > 0"
+      >
+        <mat-expansion-panel
+          (opened)="panelOpen()"
+          (closed)="panelOpenState = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Replies
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ panelOpenState ? "Reading Replies" : "Read Replies" }}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <ul>
+            <li *ngFor="let rpl of thread.reply">
+              <div style="word-wrap: break-word;">
+                {{ rpl.username }} [{{
+                  rpl.dateTime | date: "dd/MM/yyyy HH:mm:ss"
+                }}]:&nbsp;{{ rpl.replyText }}
+              </div>
+            </li>
+          </ul>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button *ngIf="thread.reply !== undefined">
+        Replies: {{ thread.reply.length }}
+      </button>
+      <button mat-button *ngIf="thread.reply === undefined">
+        Replies: 0
+      </button>
+      <button mat-button style="float: right;" (click)="reply(thread.threadID)">
+        Reply
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>

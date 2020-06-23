@@ -1,0 +1,13 @@
+package com.lecture.repository;
+
+import com.lecture.dto.User;
+
+public class ForumService {
+
+	public User getUserDetails(String username) {
+		User user = new User();
+		
+		return null;
+	}
+
+}

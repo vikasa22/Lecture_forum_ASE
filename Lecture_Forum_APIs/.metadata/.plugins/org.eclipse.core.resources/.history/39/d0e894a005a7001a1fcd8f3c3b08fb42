@@ -1,0 +1,9 @@
+package com.lecture.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.lecture.dto.User;
+
+public class UserRepository extends JpaRepository<User,Integer>{
+
+}

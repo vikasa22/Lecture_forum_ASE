@@ -1,0 +1,78 @@
+package com.lecture.dto;
+
+import java.sql.Date;
+import java.util.Arrays;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Replies {
+
+	private Integer threadID;
+
+	private Integer userID;
+
+	private String replyText;
+
+	private byte[] attachment;
+
+	private Date dateTime;
+
+	public Integer getThreadID() {
+		return threadID;
+	}
+
+	public void setThreadID(Integer threadID) {
+		this.threadID = threadID;
+	}
+
+	public Integer getUserID() {
+		return userID;
+	}
+
+	public void setUserID(Integer userID) {
+		this.userID = userID;
+	}
+
+	public String getReplyText() {
+		return replyText;
+	}
+
+	public void setReplyText(String replyText) {
+		this.replyText = replyText;
+	}
+
+	public byte[] getAttachment() {
+		return attachment;
+	}
+
+	public void setAttachment(byte[] attachment) {
+		this.attachment = attachment;
+	}
+
+	public Date getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(Date dateTime) {
+		this.dateTime = dateTime;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Replies [threadID=");
+		builder.append(threadID);
+		builder.append(", userID=");
+		builder.append(userID);
+		builder.append(", replyText=");
+		builder.append(replyText);
+		builder.append(", attachment=");
+		builder.append(Arrays.toString(attachment));
+		builder.append(", dateTime=");
+		builder.append(dateTime);
+		builder.append("]");
+		return builder.toString();
+	}
+
+}

@@ -1,0 +1,42 @@
+package com.lecture.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.lecture.dto.User;
+import com.lecture.repository.RepliesRepository;
+import com.lecture.repository.ThreadRepository;
+import com.lecture.repository.UserRepository;
+
+@RestController("/api")
+public class ForumController {
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private ThreadRepository threadRepository;
+	
+	@Autowired
+	private RepliesRepository repliesRepository;
+	
+	@GetMapping("/users/{username}")
+	public User getUserDetails(@PathVariable String username) {
+		User existingUser = new User();
+		existingUser.setUsername(username);
+		return userRepository.findAll().parallelStream().filter(innerEl->innerEl.getUsername().equalsIgnoreCase(username)).findFirst().orElse(null);
+	}
+	
+	@GetMapping("/threads/{userID}")
+	public List<Thread> getThreadsOfUser(@PathVariable Integer userID){
+		List<Integer> ids = new ArrayList<>();
+		ids.add(userID);
+		return threadRepository.findAllById(ids);
+	}
+	
+}

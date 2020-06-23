@@ -1,0 +1,59 @@
+package com.lecture.controller;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.lecture.dto.Replies;
+import com.lecture.dto.Threads;
+import com.lecture.dto.TransactionStatus;
+import com.lecture.dto.Users;
+import com.lecture.repository.RepliesRepository;
+import com.lecture.repository.ThreadRepository;
+import com.lecture.repository.UserRepository;
+
+@RestController
+@RequestMapping("/api/")
+public class ForumController {
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@Autowired
+	private ThreadRepository threadRepository;
+
+	@Autowired
+	private RepliesRepository repliesRepository;
+
+	@GetMapping("/users/{username}")
+	public Users getUserDetails(@PathVariable String username) {
+		return userRepository.findAll().parallelStream()
+				.filter(innerEl -> innerEl.getUsername().equalsIgnoreCase(username)).findFirst().orElse(null);
+	}
+
+	@GetMapping("/threads/{userID}")
+	public List<Threads> getThreadsOfUser(@PathVariable Integer userID) {
+		return threadRepository.findAll().parallelStream().filter(innerEl -> innerEl.getUserID().equals(userID))
+				.collect(Collectors.toList());
+	}
+
+	@GetMapping("/threads/replies/{threadID}")
+	public List<Replies> getRepliesToThread(@PathVariable Integer threadID) {
+		return repliesRepository.findAll().parallelStream().filter(innerEl -> innerEl.getThreadID().equals(threadID))
+				.collect(Collectors.toList());
+	}
+	
+	@PostMapping("/threads/{threadID}")
+	public TransactionStatus insertThread(Threads thread) {
+		TransactionStatus status = new TransactionStatus();
+		threadRepository.save(thread);
+		return status;
+	}
+
+}

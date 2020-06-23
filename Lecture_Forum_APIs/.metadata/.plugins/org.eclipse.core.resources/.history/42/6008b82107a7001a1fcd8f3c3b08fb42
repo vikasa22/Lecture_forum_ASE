@@ -1,0 +1,5 @@
+package com.lecture.apis;
+
+public class LoadDatabase {
+
+}

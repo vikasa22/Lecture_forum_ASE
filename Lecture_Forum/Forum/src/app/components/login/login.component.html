@@ -1,0 +1,47 @@
+<h1>Login</h1>
+<mat-divider></mat-divider>
+<mat-form-field
+  class="example-form-field"
+  appearance="outline"
+  style="margin-top: 5%; width: 80%;"
+>
+  <mat-label>Username</mat-label>
+  <input matInput type="text" [(ngModel)]="username" />
+  <button
+    mat-button
+    *ngIf="username"
+    matSuffix
+    mat-icon-button
+    aria-label="Clear"
+    (click)="username = ''"
+  >
+    <mat-icon matSuffix>close</mat-icon>
+  </button>
+</mat-form-field>
+<br />
+<mat-form-field appearance="outline" style="width: 80%;">
+  <mat-label>Enter your password</mat-label>
+  <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password" />
+  <button
+    mat-icon-button
+    matSuffix
+    *ngIf="password"
+    (click)="hide = !hide"
+    [attr.aria-label]="'Hide password'"
+    [attr.aria-pressed]="hide"
+  >
+    <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+  </button>
+</mat-form-field>
+<br />
+<button mat-raised-button color="primary" (click)="doLogin(username, password)">
+  Login
+</button>
+<button
+  mat-raised-button
+  color="primary"
+  style="margin-left: 2.5%;"
+  (click)="register(username, password)"
+>
+  Register
+</button>
