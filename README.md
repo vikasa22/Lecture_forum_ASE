@@ -2,7 +2,7 @@
 
 Prerequesites:
 1. NodeJs - https://nodejs.org/en/
-2. AngularJS - https://angular.io/cli
+2. AngularJS - https://angular.io/cli (Angular Material - https://material.angular.io/guide/getting-started)
 3. Java 1.8
 4. STS - https://spring.io/tools
 5. MYSQL - https://dev.mysql.com/downloads/workbench/
